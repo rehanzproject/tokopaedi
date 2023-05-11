@@ -8,7 +8,12 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
-import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  createSearchParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { removeAllProduct } from "../../../config/redux/productSlice/productSlice";
 import { removeTransaction } from "../../../config/redux/transactionSlice/transactionSlice";
 import { logoutUser } from "../../../config/redux/userSlice/userSlice";
@@ -81,19 +86,9 @@ function NavigationBar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={isLogin ? item.href : "/login"}
-                        className={classNames(
-                          item.current
-                            ? "text-green-500"
-                            : "text-black hover:text-green-500",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
+                      <Link to={isLogin ? item.href : "/login"}>
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
