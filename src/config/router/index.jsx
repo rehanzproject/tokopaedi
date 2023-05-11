@@ -16,7 +16,7 @@ function RootRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPageView />} />
+        <Route path="/" exact element={<LandingPageView />} />
         <Route path="/product" element={<Product />} />
         <Route path="/search" element={<ProductSearch />} />
         <Route path="/:id/search" element={<ProductSearch />} />
@@ -27,8 +27,7 @@ function RootRouter() {
         <Route path="/transaction" element={<Transaction />} />
         <Route path="/setting/account" element={<SettingAccount />} />
         <Route path="/success-page" element={<SuccessPageView />} />
-        <Route path="/pembayaran" element={<Pembayaran />} />
-            
+        <Route path="/pembayaran" element={<Pembayaran />} />      
       </Routes>
     </BrowserRouter>
   );

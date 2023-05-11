@@ -83,14 +83,7 @@ function ProductSearch() {
               </select>
             </h2>
           </div>
-          {data?.product && (
-            <div className="text-2xl p-10 font-bold border">
-              Oops , Product Tidak Ketemu{" "}
-              <p className="font-normal text-lg">
-                Coba kata kunci Lain atau pilih berdasarkan Kategori
-              </p>{" "}
-            </div>
-          )}
+      
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             {data?.product.map((product) => (
               <a
