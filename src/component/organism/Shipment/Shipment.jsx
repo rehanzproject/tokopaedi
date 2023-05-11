@@ -1,12 +1,13 @@
 import { useState } from "react";
 import diskon from "../../../assets/images/diskon.jpg";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavbarLogo from "../../moleculs/NavbarLogo/NavbarLogo";
 import Modals from '../../atoms/Modals/PaymentModal/Modals'
 export default function Shipment() {
   const [open, setOpen] = useState(false);
   const [select, setSelect] = useState(0);
+  const navigate = useNavigate()
   const location = useLocation()
   const jasaEkspedisi = parseInt(select);
   const profile = useSelector((state) => state.user.user);
@@ -46,7 +47,7 @@ export default function Shipment() {
           </>
         )}
         <div className="border text-center w-1/4 my-2 rounded-lg  py-2">
-          <a onClick={()=>navigate('/setting/account')} className="">Ganti Alamat</a>
+          <button onClick={()=>navigate('/setting/account')} className="">Ganti Alamat</button>
         </div>
       </div>
       <div className="max-w-4xl px-10">
