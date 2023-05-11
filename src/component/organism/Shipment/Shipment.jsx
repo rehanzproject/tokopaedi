@@ -3,7 +3,7 @@ import diskon from "../../../assets/images/diskon.jpg";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import NavbarLogo from "../../moleculs/NavbarLogo/NavbarLogo";
-
+import Modals from '../../atoms/Modals/PaymentModal/Modals'
 export default function Shipment() {
   const [open, setOpen] = useState(false);
   const [select, setSelect] = useState(0);
