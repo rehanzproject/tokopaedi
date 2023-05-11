@@ -72,7 +72,7 @@ export default function ShoppingCart() {
                   <div>
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <h3>
-                        <a href={product.href}>{product.productName}</a>
+                       {product.productName}
                       </h3>
                     </div>
                     <p>{product.productCategory}</p>

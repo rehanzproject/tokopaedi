@@ -1,6 +1,8 @@
 import React from 'react'
 import jordan from '../../../assets/images/jordan.png'
+import { useNavigate } from 'react-router-dom'
 function Advertisement() {
+  const navigate = useNavigate()
   return (
     <div className="bg-white">
       <div className="sm:px-6 sm:py-32 lg:px-8">
@@ -24,7 +26,7 @@ function Advertisement() {
             <p className="mt-6 text-lg leading-8 font-bold ">
            Upto 50% OFF</p>
             <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-            <a href='/search?pn=air+jordan' className="rounded-2xl bg-yellow-300 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Lihat Koleksi Produk</a>
+            <a onClick={()=>navigate('/search?pn=air+jordan')} className="rounded-2xl bg-yellow-300 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Lihat Koleksi Produk</a>
             </div>
           </div>
           <div className="relative mt-16 h-80 lg:mt-8 ">

@@ -86,9 +86,17 @@ function NavigationBar() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <Link to={isLogin ? item.href : "/login"}>
+                      <a
+                        key={item}
+                        onClick={
+                          isLogin
+                            ? () => navigate(item.href)
+                            : () => navigate("/login")
+                        }
+                        className="text-black hover:text-green-500 rounded-md px-3 py-2 text-sm font-medium"
+                      >
                         {item.name}
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -111,7 +119,8 @@ function NavigationBar() {
               </div>
               <div className="absolute  inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <a
-                  href="/cart"
+                onClick={()=>navigate('/cart')}
+                  
                   className="p-3 text-gray-600  hover:text-black  hover:bg-gray-100"
                 >
                   <span className="sr-only">View Notification</span>
@@ -150,7 +159,11 @@ function NavigationBar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href={isLogin ? "/setting/account" : "/login"}
+                            onClick={
+                              isLogin
+                                ? navigate("/setting/account")
+                                : navigate("/login")
+                            }
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block text-center px-4 py-2 text-sm text-gray-700"

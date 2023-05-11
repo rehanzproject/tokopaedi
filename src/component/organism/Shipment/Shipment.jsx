@@ -39,14 +39,14 @@ export default function Shipment() {
           <>
             <h1>
               Anda belum isi Alamat , silahkan isi Terlebih dahulu{" "}
-              <a href="/setting/account" className="text-green-500">
+              <a onClick={()=>navigate('/setting/account')} className="text-green-500">
                 Disini
               </a>{" "}
             </h1>
           </>
         )}
         <div className="border text-center w-1/4 my-2 rounded-lg  py-2">
-          <a href="/setting/account" className="">Ganti Alamat</a>
+          <a onClick={()=>navigate('/setting/account')} className="">Ganti Alamat</a>
         </div>
       </div>
       <div className="max-w-4xl px-10">
