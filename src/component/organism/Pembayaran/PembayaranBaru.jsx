@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { changeStatus } from "../../../config/redux/transactionSlice/transactionSlice";
 
 export default function PembayaranBaru() {
   const location = useLocation();
@@ -36,6 +35,7 @@ export default function PembayaranBaru() {
   const minutes = Math.floor((remainingTime % 3600) / 60);
   const seconds = remainingTime % 60;
   const handlePembayaran = () => {
+  
    transaction[x].status = true
     navigate("/success-page");
   };
