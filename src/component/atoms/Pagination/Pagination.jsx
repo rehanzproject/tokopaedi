@@ -45,7 +45,7 @@ function Pagination() {
             key={i}
             onClick={()=> dispatch(paginationControl(v))}
             aria-current="page"
-            className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            className={`relative inline-flex items-center px-4 py-2 bg-${p == v ? "green" : "" }-400 text-sm font-semibold text-${p == v ? "white" : "black" } ring-1 ring-inset ring-gray-300 hover:bg-${p+1 == v ? "green" : "" }-500 focus:z-20 focus:outline-offset-0`}
             >
             {v}
           </a>

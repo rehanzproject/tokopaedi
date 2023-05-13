@@ -159,10 +159,10 @@ function NavigationBar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            onClick={
+                            href={
                               isLogin
-                                ? navigate("/setting/account")
-                                : navigate("/login")
+                                ? "/setting/account"
+                                : "/login"
                             }
                             className={classNames(
                               active ? "bg-gray-100" : "",

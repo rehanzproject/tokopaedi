@@ -13,6 +13,7 @@ export default function Shipment() {
   const profile = useSelector((state) => state.user.user);
   const isProfile = useSelector((state) => state.user.isProfile);
   const products = location.state
+  
   const totalCheckout = products.reduce(
     (accumulator, currentValue) => currentValue.productPrice + accumulator,
     0
@@ -21,7 +22,7 @@ export default function Shipment() {
   return (
     <>
       <NavbarLogo />
-      <div className="text font-medium py-8 px-24 max-w-4xl">
+      <div className="text font-medium py-8 px-20 max-w-4xl">
         <h1 className="text-2xl">Checkout</h1>
         <h1 className=" py-3">Alamat Pengiriman</h1>
         {isProfile ? (
@@ -50,9 +51,9 @@ export default function Shipment() {
           <button onClick={()=>navigate('/setting/account')} className="">Ganti Alamat</button>
         </div>
       </div>
-      <div className="max-w-4xl px-10">
+      <div className="max-w-4xl px-10 ">
         <div className="flow-root">
-          <ul role="list" className="-my-6 divide-y divide-gray-200">
+          <ul role="list" className="-my-6 divide-y border-t divide-gray-200">
             {products.map((product, i) => (
               <li key={i} className="flex py-6">
                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">

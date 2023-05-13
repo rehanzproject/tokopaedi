@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { addProfile, logoutUser } from "../../../config/redux/userSlice/userSlice";
+import { addProfile, logoutUser, setAlert } from "../../../config/redux/userSlice/userSlice";
 import {  useNavigate } from "react-router-dom";
 import AlertSuccess from "../../atoms/Alert/AlertSuccess";
 import NavigationBar from "../../moleculs/NavigationBar/NavigationBar";
@@ -57,7 +57,8 @@ function SettingAccount() {
   return (
     <>
       <NavigationBar />
- 
+      <AlertSuccess />
+     
       <div className="px-24">
         <h1 className="font-bold text-2xl py-4">Akun Kamu</h1>
         <h1 className="font-semibold py-2">Ubah Biodata diri</h1>
@@ -185,8 +186,7 @@ function SettingAccount() {
         >
           Kembali
         </button>}
-        <AlertSuccess />
-     
+       
       </div>
       
     </>

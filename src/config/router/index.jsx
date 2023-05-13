@@ -11,6 +11,7 @@ import ProductDetail from "../../component/organism/ProductDetail/ProductDetail"
 import Pembayaran from "../../component/organism/Pembayaran/Pembayaran";
 import SettingAccount from "../../component/organism/SettingAccount/SettingAccount";
 import SuccessPageView from "../../views/SuccessPageView"
+import PembayaranBaru from "../../component/organism/Pembayaran/PembayaranBaru";
 
 function RootRouter() {
   return (
@@ -27,7 +28,8 @@ function RootRouter() {
         <Route path="/transaction" element={<Transaction />} />
         <Route path="/setting/account" element={<SettingAccount />} />
         <Route path="/success-page" element={<SuccessPageView />} />
-        <Route path="/pembayaran" element={<Pembayaran />} />      
+        <Route path="/pembayaran" element={<Pembayaran />} />
+        <Route path="/pembayaran-baru" element={<PembayaranBaru />} />       
       </Routes>
     </BrowserRouter>
   );

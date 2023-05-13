@@ -1,14 +1,23 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function DetailModal({ state }) {
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const cancelButtonRef = useRef(null);
-  const totalHarga = state.totalBelanja + state.totalEkspedisi * state.product.length;
+  const handleBayar = () => {
+    navigate("/pembayaran-baru" ,
+      {
+        state: state 
+      });
+  };
+
+  const totalHarga =
+    state.totalBelanja + state.totalEkspedisi * state.product.length;
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -72,7 +81,10 @@ export default function DetailModal({ state }) {
                   <div className="py-4 ">
                     <h1 className="font-semibold">Detail Produk</h1>
                     {state.product.map((v, i) => (
-                      <div className="border my-1 rounded-lg justify-between flex ">
+                      <div
+                        key={i}
+                        className="border my-1 rounded-lg justify-between flex "
+                      >
                         <img
                           src={v.imageSrc}
                           alt=""
@@ -125,7 +137,10 @@ export default function DetailModal({ state }) {
                       <p>Rp{totalHarga.toLocaleString()}</p>
                     </div>
                     {!state.status && (
-                      <button className="w-full text-center border border-green-500 text-green-500 font-bold py-2 rounded-lg">
+                      <button
+                        onClick={()=>handleBayar()}
+                        className="w-full text-center border border-green-500 text-green-500 font-bold py-2 rounded-lg"
+                      >
                         Bayar Sekarang
                       </button>
                     )}

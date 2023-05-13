@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function BreadCrumbs({name}) {
   const navigate = useNavigate()
   return (
-    <nav className="w-full rounded-md px-10 py-2">
+    <nav className="w-full rounded-md px-24 py-2">
       <ol className="list-reset flex">
         <li>
           <a

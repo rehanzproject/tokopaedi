@@ -4,23 +4,23 @@ import DetailModal from "../../atoms/Modals/DetailModal/DetailModal"
 import NavigationBar from "../../moleculs/NavigationBar/NavigationBar";
 function Transaction() {
   const transactions = useSelector((state) => state.transaction);
-  const product = transactions.map((v, i) => v.product);
- 
+  
   const [open, setOpen] = useState(false);
   const [value, setValue ]= useState()
-  const handleClick = (v) => {
+  const handleClick = (v , index) => {
     setValue(v)
     setOpen(!open)
+    localStorage.setItem("v" , index)
   }
   return (
     <>
       <NavigationBar />
-      {open && <DetailModal state={value} />}
+      {open && <DetailModal state={value}  />}
       <div className="px-24 mt-6">
         <h1 className="font-bold text-2xl">Daftar Transaksi</h1>
         <div className="border py-2 my-4 rounded-lg">
-          {transactions.map((v, i) => (
-            <div key={i} className="border  rounded-lg m-5 p-5">
+          {transactions.map((v, index) => (
+            <div key={index} className="border  rounded-lg m-5 p-5">
               <div className="flex ">
                 <p className="font-bold pr-2">Belanja</p>
                 <p className="pr-4">{v.hari}</p>
@@ -43,7 +43,7 @@ function Transaction() {
                     Total {v.product[0].qty} Barang x Rp{v.product[0].productPrice}
                   </p>
                   <button
-                    onClick={() => handleClick(v)}
+                    onClick={() => handleClick(v, index )}
                     className="text-green-600 font-bold text-sm"
                   >
                     Lihat Detail Transaksi

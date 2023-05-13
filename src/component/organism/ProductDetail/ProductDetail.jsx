@@ -22,7 +22,7 @@ export default function ProductDetail() {
       dispatch(setAlert("sudah"));
     } else {
       dispatch(setAlert("keranjang"));
-      dispatch(addProduct({ ...product, qty: 1 }));
+      dispatch(addProduct({ ...product, qty: 1, expedition: "" }));
     }
   };
 
