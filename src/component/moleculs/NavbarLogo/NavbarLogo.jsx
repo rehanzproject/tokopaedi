@@ -6,8 +6,10 @@ import {
   
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 function NavbarLogo() {
+  const navigate = useNavigate()
   return (
     <Disclosure as="nav" className="border-b sticky">
       {({ open }) => (
@@ -33,8 +35,9 @@ function NavbarLogo() {
                     alt="Your Company"
                   />
                   <img
-                    className="hidden h-8 w-auto lg:block"
+                    className="cursor-pointer hidden h-8 w-auto lg:block"
                     src={logo} alt="Your Company"
+                    onClick={()=> navigate('/')}
                   />
                 </div>
               

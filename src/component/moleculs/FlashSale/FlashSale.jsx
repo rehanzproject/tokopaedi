@@ -1,8 +1,8 @@
 import React from "react";
-
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../../config/redux/productSlice/productSlice";
+import { makeRupiahValue } from "../../../config/helper/helperMethod";
 function FlashSale() {
   const product = [
     {
@@ -63,10 +63,10 @@ function FlashSale() {
                 <p className="text-gray-500  mt-2">{v.productCategory} </p>
                 <div className="flex ">
                   <p className="text-sm font-medium text-gray-700 mt-2 line-through">
-                    Rp{v.productPrice * 2}
+                    {makeRupiahValue(v.productPrice * 2)}
                   </p>
                   <p className="text-lg font-medium text-yellow-300 m-2">
-                    Rp{v.productPrice.toLocaleString()}!
+                    {makeRupiahValue(v.productPrice)}!
                   </p>
                 </div>
                 <button

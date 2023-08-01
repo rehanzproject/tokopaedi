@@ -6,6 +6,7 @@ import AlertSuccess from "../../atoms/Alert/AlertSuccess";
 import { setAlert } from "../../../config/redux/userSlice/userSlice";
 import BreadCrumbs from "../../atoms/BreadCrumbs/BreadCrumbs";
 import NavigationBar from "../../moleculs/NavigationBar/NavigationBar";
+import { makeRupiahValue } from "../../../config/helper/helperMethod";
 
 export default function ProductDetail() {
   const location = useLocation();
@@ -13,11 +14,12 @@ export default function ProductDetail() {
   const product = location.state.product;
   const productCart = useSelector((state) => state.product);
   const dispatch = useDispatch();
-  const result = productCart.find(
-    (productFilter) => product.id === productFilter.id
-  );
+  
 
   const addToShoppingCart = () => {
+    const result = productCart.find(
+      (productFilter) => product.id === productFilter.id
+    );
     if (result) {
       dispatch(setAlert("sudah"));
     } else {
@@ -55,12 +57,12 @@ export default function ProductDetail() {
             </h3>
             <p>Rating {product.rating} ⭐</p>
             <p className="text-4xl font-bold my-2 text-gray-900">
-              Rp{product.productPrice.toLocaleString()}
+              {makeRupiahValue(product.productPrice)}
             </p>
             <div className="relative inline-flex">
               <p className="bg-red-300  text-sm text-red-600 p-1 mx-2">50%</p>
               <p className=" text-lg text-gray-500 line-through ">
-                Rp{product.productPrice * 2}
+                {makeRupiahValue(product.productPrice * 2)}
               </p>
             </div>
           </section>

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import NavbarLogo from "../../moleculs/NavbarLogo/NavbarLogo";
 import Modals from '../../atoms/Modals/PaymentModal/Modals'
+import { makeRupiahValue } from "../../../config/helper/helperMethod";
 export default function Shipment() {
   const [open, setOpen] = useState(false);
   const [select, setSelect] = useState(0);
@@ -100,7 +101,7 @@ export default function Shipment() {
                     </div>
                     <p >x{product.qty}</p>
                     <p className=" text-lg font-bold">
-                      Rp{product.productPrice.toLocaleString()}
+                      {makeRupiahValue(product.productPrice)}
                     </p>
 
                     {/* <p className="bg-green-500 text-white text-center">Pilih pembayaran</p> */}
@@ -110,7 +111,7 @@ export default function Shipment() {
                   </div>
                   <div className="border-t py-1 flex justify-between text-xl font-bold ">
                     <h1>Subtotal</h1>
-                    <h1>Rp{product.productPrice.toLocaleString()}</h1>
+                    <h1>{makeRupiahValue(product.productPrice)}</h1>
                   </div>
                 </div>
               </li>
@@ -129,7 +130,7 @@ export default function Shipment() {
         </div>
         <div className="flex py-2 text-gray-500 justify-between">
           <p>Total Harga({products.length} Barang) </p>
-          <p className="font-bold">Rp{totalCheckout.toLocaleString()}</p>
+          <p className="font-bold">{makeRupiahValue(totalCheckout)}</p>
         </div>
         <div className="flex py-2 text-gray-500 justify-between">
           <p>Diskon </p>
@@ -137,12 +138,12 @@ export default function Shipment() {
         </div>
         <div className="flex py-2 text-gray-500 justify-between">
           <p>Jasa Ekspedisi </p>
-          <p className="font-bold"> Rp{jasaEkspedisi * products.length}</p>
+          <p className="font-bold">{makeRupiahValue(jasaEkspedisi * products.length)}</p>
         </div>
 
         <div className="border-t py-2 flex justify-between font-bold text-lg">
           <p>Total Tagihan</p>
-          <p>Rp{totalCheckout + jasaEkspedisi}</p>
+          <p>{makeRupiahValue(totalCheckout + jasaEkspedisi)}</p>
         </div>
         <div className="mt-6">
           <button

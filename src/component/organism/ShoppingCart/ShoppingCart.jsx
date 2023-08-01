@@ -1,15 +1,19 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeQtyMinus, changeQtyPlus, removeProduct } from "../../../config/redux/productSlice/productSlice";
+import {
+  changeQtyMinus,
+  changeQtyPlus,
+  removeProduct,
+} from "../../../config/redux/productSlice/productSlice";
 import { MinusCircleIcon } from "@heroicons/react/20/solid";
 import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import AlertSuccess from "../../atoms/Alert/AlertSuccess";
 import { setAlert } from "../../../config/redux/userSlice/userSlice";
 import NavbarLogo from "../../moleculs/NavbarLogo/NavbarLogo";
+import { makeRupiahValue } from "../../../config/helper/helperMethod";
 
 export default function ShoppingCart() {
- 
   const [clicked, setClicked] = useState([]);
   const navigate = useNavigate();
   const products = useSelector((state) => state.product);
@@ -31,14 +35,20 @@ export default function ShoppingCart() {
       setClicked((prev) => [...prev, product]);
       // if found , delete product
     } else {
-      setClicked(clicked.filter((v) => v !== product));
+      setClicked(clicked.filter((v) => v.id !== product.id));
     }
   };
+
   const handleTrash = (i) => {
     dispatch(setAlert("hapus"));
     dispatch(removeProduct(i));
   };
-  
+
+  const handleMinus = (product) => {
+    if (product.qty >= 2) {
+      dispatch(changeQtyMinus(product));
+    }
+  };
   return (
     <>
       <NavbarLogo />
@@ -74,7 +84,7 @@ export default function ShoppingCart() {
                     </div>
                     <p>{product.productCategory}</p>
                     <p className="mt-1 text-lg font-bold">
-                      Rp{product.productPrice.toLocaleString()}
+                      {makeRupiahValue(product.productPrice)}
                     </p>
                     <p className="mt-1 text-sm text-gray-500">
                       {product.category}
@@ -94,18 +104,17 @@ export default function ShoppingCart() {
                       <button disabled={true}>
                         <MinusCircleIcon
                           className="w-8 mx-5 text-green-500"
-                          onClick={() => dispatch(changeQtyMinus(product))}
+                          onClick={() => handleMinus(product)}
                         />
                       </button>
 
                       <p className="text-2xl">{product.qty}</p>
                       <button disabled={true}>
-                      <PlusCircleIcon
-                        className="w-8 mx-5 text-green-500"
-                        onClick={() => dispatch(changeQtyPlus(product))}
-                      />
+                        <PlusCircleIcon
+                          className="w-8 mx-5 text-green-500"
+                          onClick={() => dispatch(changeQtyPlus(product))}
+                        />
                       </button>
-                     
                     </div>
                   </div>
                 </div>
@@ -120,11 +129,11 @@ export default function ShoppingCart() {
         </div>
         <div className="flex py-2 text-gray-500 justify-between ">
           <p>Total Harga({clicked.length} Barang) </p>
-          <p className="font-bold">Rp{totalBarang.toLocaleString()}</p>
+          <p className="font-bold">{makeRupiahValue(totalBarang)}</p>
         </div>
         <div className="border-t py-2 flex justify-between font-bold text-xl">
           <p>Total Tagihan</p>
-          <p>Rp{totalBarang.toLocaleString()}</p>
+          <p>{makeRupiahValue(totalBarang)}</p>
         </div>
         <div className="mt-6">
           <button
@@ -136,7 +145,7 @@ export default function ShoppingCart() {
               clicked.length == 0 ? "gray-100" : "green-600"
             }-600`}
           >
-            Beli({clicked.length })
+            Beli({clicked.length})
           </button>
         </div>
         <div className="mt-6  justify-center text-center text-sm text-gray-500">

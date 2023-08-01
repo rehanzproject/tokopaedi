@@ -4,12 +4,13 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { addTransaction } from "../../../../config/redux/transactionSlice/transactionSlice";
 import { useNavigate } from "react-router-dom";
+import { makeRupiahValue } from "../../../../config/helper/helperMethod";
 
-export default function Modals({totalBelanja, totalEkspedisi, product}) {
+export default function Modals({ totalBelanja, totalEkspedisi, product }) {
   const [open, setOpen] = useState(true);
-  const [radio, setRadio] = useState('');
-  const dispatch = useDispatch()
-  const navigate= useNavigate()
+  const [radio, setRadio] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const methodPayment = [
     {
       name: "BCA Virtual Account",
@@ -18,7 +19,8 @@ export default function Modals({totalBelanja, totalEkspedisi, product}) {
     },
     {
       name: "BRIVA",
-      image: "https://www.bing.com/ck/a?!&&p=15aa7601074a5564JmltdHM9MTY4MzQxNzYwMCZpZ3VpZD0yZmIxNjczOS0zNDJkLTYyYzQtMWI3ZC03NWQzMzU3YjYzOWYmaW5zaWQ9NTUxOA&ptn=3&hsh=3&fclid=2fb16739-342d-62c4-1b7d-75d3357b639f&u=a1L2ltYWdlcy9zZWFyY2g_cT1icml2YSBsb2dvJkZPUk09SVFGUkJBJmlkPTc0MDU4MjEwOEM4OTFEQTI2ODIxMEUwOTFENDQ2QTM1ODA5QUJBMDM&ntb=1",
+      image:
+        "https://www.bing.com/ck/a?!&&p=15aa7601074a5564JmltdHM9MTY4MzQxNzYwMCZpZ3VpZD0yZmIxNjczOS0zNDJkLTYyYzQtMWI3ZC03NWQzMzU3YjYzOWYmaW5zaWQ9NTUxOA&ptn=3&hsh=3&fclid=2fb16739-342d-62c4-1b7d-75d3357b639f&u=a1L2ltYWdlcy9zZWFyY2g_cT1icml2YSBsb2dvJkZPUk09SVFGUkJBJmlkPTc0MDU4MjEwOEM4OTFEQTI2ODIxMEUwOTFENDQ2QTM1ODA5QUJBMDM&ntb=1",
     },
     {
       name: "Livin By Mandiri",
@@ -27,10 +29,10 @@ export default function Modals({totalBelanja, totalEkspedisi, product}) {
     },
   ];
   const handleBayar = () => {
-    navigate('/pembayaran', {
-      state : { product, totalBelanja , totalEkspedisi, radio  }
-    })
-  }
+    navigate("/pembayaran", {
+      state: { product, totalBelanja, totalEkspedisi, radio },
+    });
+  };
   const cancelButtonRef = useRef(null);
 
   return (
@@ -83,26 +85,24 @@ export default function Modals({totalBelanja, totalEkspedisi, product}) {
                       Metode Pembayaran
                     </p>
                     {methodPayment.map((v, i) => (
-                      
-                        <div key={i} className="justify-between flex py-2 ">
-                          <p className="font-semibold">{v.name}</p>
-                          <input
-                            type="radio"
-                            name="method"
-                            id=""
-                            onChange={(e)=>setRadio(v)}
-                            value={v}
-                            className=""
-                          />
-                        </div>
-                     
+                      <div key={i} className="justify-between flex py-2 ">
+                        <p className="font-semibold">{v.name}</p>
+                        <input
+                          type="radio"
+                          name="method"
+                          id=""
+                          onChange={(e) => setRadio(v)}
+                          value={v}
+                          className=""
+                        />
+                      </div>
                     ))}
                   </div>
                   <div className="py-4 border-t">
                     <h1 className="font-semibold">Ringkasan Pembayaran</h1>
                     <div className="justify-between flex">
                       <p>Total Belanja</p>
-                      <p>Rp{totalBelanja}</p>
+                      <p>{makeRupiahValue(totalBelanja)}</p>
                     </div>
                     <div className="justify-between flex">
                       <p>Diskon</p>
@@ -110,7 +110,7 @@ export default function Modals({totalBelanja, totalEkspedisi, product}) {
                     </div>
                     <div className="justify-between flex">
                       <p>Jasa Ekspedisi</p>
-                      <p>Rp{totalEkspedisi * product.length}</p>
+                      <p>{makeRupiahValue(totalEkspedisi * product.length)}</p>
                     </div>
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export default function Modals({totalBelanja, totalEkspedisi, product}) {
                     Total Tagihan{" "}
                     <p className="text-xl font-bold">
                       {" "}
-                      Rp{totalBelanja + totalEkspedisi}
+                      {makeRupiahValue(totalBelanja + totalEkspedisi)}
                     </p>
                   </p>
 

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ClockLoader } from "react-spinners";
 import NavigationBar from "../../moleculs/NavigationBar/NavigationBar";
+import { makeRupiahValue } from "../../../config/helper/helperMethod";
 
 function ProductSearch() {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ function ProductSearch() {
                 </h3>
                 <p className="text-sm">{product.productCategory}</p>
                 <p className="mt-1 text-lg  text-gray-900 font-bold">
-                  Rp{product.productPrice}
+                  {makeRupiahValue(product.productPrice)}
                 </p>
                 <p>⭐ {product.rating}</p>
               </a>

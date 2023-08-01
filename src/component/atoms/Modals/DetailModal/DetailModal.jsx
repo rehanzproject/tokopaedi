@@ -3,6 +3,10 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  makeRupiahValue,
+  transformToDateWithMonthName,
+} from "../../../../config/helper/helperMethod";
 
 export default function DetailModal({ state }) {
   const [open, setOpen] = useState(true);
@@ -10,12 +14,10 @@ export default function DetailModal({ state }) {
   const user = useSelector((state) => state.user.user);
   const cancelButtonRef = useRef(null);
   const handleBayar = () => {
-    navigate("/pembayaran-baru" ,
-      {
-        state: state 
-      });
+    navigate("/pembayaran-baru", {
+      state: state,
+    });
   };
-
   const totalHarga =
     state.totalBelanja + state.totalEkspedisi * state.product.length;
   return (
@@ -70,19 +72,19 @@ export default function DetailModal({ state }) {
                     <div className="flex justify-between text-sm ">
                       <p className="text-gray-500">No invoice</p>
                       <p className="text-green-500 font-bold">
-                        {state.invoice}
+                        {state.invoice}{" "}
                       </p>
                     </div>
                     <div className="flex justify-between text-sm text-gray-500">
                       <p>Tanggal Pembelian</p>
-                      <p>{state.hari}</p>
+                      <p>{transformToDateWithMonthName(state.hari)}</p>
                     </div>
                   </div>
                   <div className="py-4 ">
                     <h1 className="font-semibold">Detail Produk</h1>
                     {state.product.map((v, i) => (
                       <div
-                        key={i}
+                        key={v.productName}
                         className="border my-1 rounded-lg justify-between flex "
                       >
                         <img
@@ -92,12 +94,14 @@ export default function DetailModal({ state }) {
                         />
                         <p className="text-sm font-bold">
                           {v.productName}{" "}
-                          <p className="font-normal">1x Rp{v.productPrice}</p>{" "}
+                          <p className="font-normal">
+                            {v.qty}x {makeRupiahValue(v.productPrice)}
+                          </p>{" "}
                         </p>
                         <p className="border-l px-2">
                           Total Harga{" "}
                           <p className="font-semibold">
-                            Rp {v.productPrice.toLocaleString()}
+                            {makeRupiahValue(v.productPrice)}
                           </p>
                         </p>
                       </div>
@@ -126,19 +130,28 @@ export default function DetailModal({ state }) {
                     </div>
                     <div className="flex justify-between py-1 text-sm text-gray-500 border-dashed border-t">
                       <p>Total Harga</p>
-                      <p>Rp{state.totalBelanja}</p>
+                      <p>{makeRupiahValue(state.totalBelanja)}</p>
                     </div>
                     <div className="flex justify-between py-1 text-sm text-gray-500 ">
                       <p>Total Ongkos Kirim</p>
-                      <p>Rp{state.totalEkspedisi * state.product.length}</p>
+                      <p>
+                        {makeRupiahValue(
+                          state.totalEkspedisi * state.product.length
+                        )}
+                      </p>
                     </div>
-                    <div className="flex justify-between py-1 font-bold border-dashed border-t ">
+                    <div className="flex justify-between py-1 font-bold border-dashed border-t">
                       <p>Total Tagihan</p>
-                      <p>Rp{totalHarga.toLocaleString()}</p>
+                      <p>
+                        {makeRupiahValue(
+                          state.totalBelanja +
+                            state.totalEkspedisi * state.product.length
+                        )}
+                      </p>
                     </div>
                     {!state.status && (
                       <button
-                        onClick={()=>handleBayar()}
+                        onClick={() => handleBayar()}
                         className="w-full text-center border border-green-500 text-green-500 font-bold py-2 rounded-lg"
                       >
                         Bayar Sekarang

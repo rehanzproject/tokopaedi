@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  useLocation, useNavigate } from "react-router-dom";
 import { addTransaction } from "../../../config/redux/transactionSlice/transactionSlice";
+import { makeRupiahValue } from "../../../config/helper/helperMethod";
 
 export default function Pembayaran() {
    const location =  useLocation()
@@ -66,14 +67,11 @@ export default function Pembayaran() {
           <p>Nomor Virtual Account</p>
           <p className="font-semibold">{va}{user.nomorHP}</p>
           <p className="pt-3">Total Pembayaran</p>
-          <p className="font-bold text-black text-xl">Rp{totalPembayaran.toLocaleString()}</p>
+          <p className="font-bold text-black text-xl">{makeRupiahValue(totalPembayaran)}</p>
         </div>
-        
-       
         <button onClick={handleBuy} className="inline-flex border-2 items-center my-4 justify-center rounded-md text-green-500 py-2 px-10 text-sm font-semibold shadow-sm sm:ml-3 sm:w-full">
           Beli Lagi
         </button>
-       
         <button onClick={handlePembayaran} className="inline-flex items-center my-4 justify-center rounded-md bg-green-500 py-2 px-10 text-sm font-semibold text-white shadow-sm  hover:bg-green-600 sm:ml-3 sm:w-full">
           Anggap saja sudah Bayar
         </button>
